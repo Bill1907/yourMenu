@@ -1,4 +1,7 @@
+import { FunctionComponent } from "react";
 import styled from "@emotion/styled";
+import Card from "./components/Card";
+import GlobalStyle from "./components/Common/GlobalStyle";
 
 const MainContainer = styled.main`
   width: 100%;
@@ -9,10 +12,14 @@ const MainContainer = styled.main`
   align-items: center;
 `
 
-const App = () => {
+const App: FunctionComponent = () => {
+  // TODO content wrapper를 만들고 그 안에서 콘텐츠 넘기는 기능 추가
   return (
     <MainContainer>
-      Hello world
+      <Card>
+        CardContent
+      </Card>
+      <GlobalStyle />
     </MainContainer>
   )
 };
