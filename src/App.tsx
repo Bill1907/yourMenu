@@ -1,4 +1,13 @@
+import { FunctionComponent, ReactElement, useState } from "react";
 import styled from "@emotion/styled";
+import Card from "./components/Card";
+import GlobalStyle from "./components/Common/GlobalStyle";
+import RadioInput from "./components/Input/RadioInput";
+import RangeInput from "./components/Input/RangeInput";
+
+interface mapType {
+  [index: number]: ReactElement;
+}
 
 const MainContainer = styled.main`
   width: 100%;
@@ -9,10 +18,23 @@ const MainContainer = styled.main`
   align-items: center;
 `
 
-const App = () => {
+const renderingContentMap : mapType= {
+  0: <RadioInput></RadioInput>,
+  1: <RangeInput></RangeInput>
+}
+
+const App: FunctionComponent = () => {
+  const [phase, setPhase] = useState<number>(0);
+
+  const onClickNext = ():void => setPhase(phase + 1);
+  
   return (
     <MainContainer>
-      Hello world
+      <Card>
+        {renderingContentMap[phase]}
+        <button onClick={onClickNext}>next</button>
+      </Card>
+      <GlobalStyle />
     </MainContainer>
   )
 };
