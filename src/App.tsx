@@ -1,7 +1,13 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent, ReactElement, useState } from "react";
 import styled from "@emotion/styled";
 import Card from "./components/Card";
 import GlobalStyle from "./components/Common/GlobalStyle";
+import RadioInput from "./components/Input/RadioInput";
+import RangeInput from "./components/Input/RangeInput";
+
+interface mapType {
+  [index: number]: ReactElement;
+}
 
 const MainContainer = styled.main`
   width: 100%;
@@ -12,12 +18,21 @@ const MainContainer = styled.main`
   align-items: center;
 `
 
+const renderingContentMap : mapType= {
+  0: <RadioInput></RadioInput>,
+  1: <RangeInput></RangeInput>
+}
+
 const App: FunctionComponent = () => {
-  // TODO content wrapper를 만들고 그 안에서 콘텐츠 넘기는 기능 추가
+  const [phase, setPhase] = useState<number>(0);
+
+  const onClickNext = ():void => setPhase(phase + 1);
+  
   return (
     <MainContainer>
       <Card>
-        CardContent
+        {renderingContentMap[phase]}
+        <button onClick={onClickNext}>next</button>
       </Card>
       <GlobalStyle />
     </MainContainer>
